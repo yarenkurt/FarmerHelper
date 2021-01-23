@@ -1,6 +1,8 @@
 package com.example.farmerhelper;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +15,8 @@ import com.example.farmerhelper.models.Settings;
 import com.example.farmerhelper.results.Result;
 import com.google.android.material.snackbar.Snackbar;
 
-public class ProfileActivity extends AppCompatActivity {
+public class
+ProfileActivity extends AppCompatActivity {
     EditText txtFullName,txtEmail,txtGender;
 AccountDbManager dbManager;
     @Override
@@ -28,6 +31,11 @@ AccountDbManager dbManager;
         txtEmail.setText(Settings.email);
         txtGender.setText(Settings.gender);
         dbManager=new AccountDbManager(this);
+
+        Toolbar toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     public void save(View view) {

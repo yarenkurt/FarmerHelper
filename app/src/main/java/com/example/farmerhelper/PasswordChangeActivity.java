@@ -1,6 +1,8 @@
 package com.example.farmerhelper;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,6 +38,10 @@ public class PasswordChangeActivity extends AppCompatActivity {
         btnChangePassword = findViewById(R.id.btnChangePassword);
         txtFullName.setText(Settings.fullName);
         dbManager = new AccountDbManager(this);
+        Toolbar toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     public void changePassword(View view) {

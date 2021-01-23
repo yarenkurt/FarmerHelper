@@ -107,12 +107,14 @@ public class DetailActivity extends AppCompatActivity implements NavigationView.
                 sendEmail();
                 break;
             case R.id.profile:
-                Intent intent = new Intent(DetailActivity.this, ProfileActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(this,ProfileActivity.class));
+                //Intent intent = new Intent(DetailActivity.this, ProfileActivity.class);
+                //startActivity(intent);
                 break;
             case R.id.passwordChange:
-                Intent pwdIntent = new Intent(DetailActivity.this, PasswordChangeActivity.class);
-                startActivity(pwdIntent);
+                startActivity(new Intent(this,PasswordChangeActivity.class));
+                //Intent pwdIntent = new Intent(DetailActivity.this, PasswordChangeActivity.class);
+                //startActivity(pwdIntent);
                 break;
             case R.id.logout:
                 logout();

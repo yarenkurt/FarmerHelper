@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.farmerhelper.R;
 import com.example.farmerhelper.db.AccountDbManager;
+import com.example.farmerhelper.db.PlantDbManager;
 import com.example.farmerhelper.models.AccountModel;
 import com.example.farmerhelper.models.LoginModel;
 import com.example.farmerhelper.models.Settings;
@@ -24,6 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
     ProgressBar loading;
     EditText fullName, email, password, confirmPassword;
     AccountDbManager dbManager;
+    PlantDbManager plantDbManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,8 @@ public class RegisterActivity extends AppCompatActivity {
         confirmPassword = findViewById(R.id.txtConfirmPassword);
 
         dbManager = new AccountDbManager(this);
+        plantDbManager = new PlantDbManager(this);
+
     }
 
     public void register(View view) {
@@ -64,6 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
                 loading.setVisibility(View.INVISIBLE);
                 btnRegister.setVisibility(View.VISIBLE);
             } else {
+                plantDbManager.seedData();
                 Toast.makeText(this, result.Message, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                 Settings.accountId = result.Data.id;

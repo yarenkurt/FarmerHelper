@@ -40,8 +40,10 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlantViewHol
             return;
         }
         String name = cursor.getString(cursor.getColumnIndex(PlantOptions.COLUMN_TITLE));
+        String lifecycle = cursor.getString(cursor.getColumnIndex(PlantOptions.COLUMN_LIFECYCLE));
         long id=cursor.getLong(cursor.getColumnIndex(PlantOptions._ID));
         holder.txtTitle.setText(name);
+        holder.txtLifecycle.setText(lifecycle);
         holder.itemView.setTag(id);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -62,12 +64,13 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlantViewHol
     }
 
     public class PlantViewHolder extends RecyclerView.ViewHolder {
-        TextView txtTitle;
+        TextView txtTitle, txtLifecycle;
         private CardView cardView;
         public PlantViewHolder(@NonNull View itemView) {
             super(itemView);
             this.cardView=(CardView)itemView;
             txtTitle=itemView.findViewById(R.id.txtTitle);
+            txtLifecycle=itemView.findViewById(R.id.txtLifecycle);
         }
     }
 

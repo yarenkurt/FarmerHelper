@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.farmerhelper.db.AccountDbManager;
+import com.example.farmerhelper.db.PlantDbManager;
 import com.example.farmerhelper.models.AccountModel;
 import com.example.farmerhelper.models.LoginModel;
 import com.example.farmerhelper.models.Settings;
@@ -35,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         email.setText("abdi.kurt@yeditepesoft.com");
         password.setText("124578");
         dbManager = new AccountDbManager(this);
+
     }
 
     public void login(View view) {
@@ -54,6 +56,9 @@ public class LoginActivity extends AppCompatActivity {
                 loading.setVisibility(View.INVISIBLE);
                 btnLogin.setVisibility(View.VISIBLE);
             } else {
+
+
+
                 Toast.makeText(this, result.Message, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 Settings.accountId = result.Data.id;

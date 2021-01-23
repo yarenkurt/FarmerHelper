@@ -28,10 +28,11 @@
             android:textSize="24sp"/>
 
         <TextView
+            android:id="@+id/txtLifecycle"
             style="@style/Base.TextAppearance.AppCompat.Body1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Content here" />
+             />
 
     </LinearLayout>
 

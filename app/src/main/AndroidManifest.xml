@@ -6,27 +6,42 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".ApplicationClass"
         android:allowBackup="true"
         android:icon="@drawable/appicon"
         android:label="@string/app_name"
         android:roundIcon="@drawable/appicon"
         android:supportsRtl="true"
-        android:name=".ApplicationClass"
         android:theme="@style/Theme.FarmerHelper">
-        <activity android:name=".PasswordChangeActivity"></activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".RegisterActivity" />
+
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.FarmerHelper.NoActionBar"></activity>
-        <activity android:name=".ProfileActivity" />
+            android:theme="@style/Theme.FarmerHelper.NoActionBar" />
+
         <activity android:name=".DetailActivity" />
+        <activity
+            android:name=".ProfileActivity"
+            android:parentActivityName=".DetailActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DetailActivity"></meta-data>
+        </activity>
+
+        <activity
+            android:name=".PasswordChangeActivity"
+            android:parentActivityName=".DetailActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DetailActivity"></meta-data>
+        </activity>
     </application>
 
 </manifest>

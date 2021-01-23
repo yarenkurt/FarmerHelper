@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+
 import androidx.annotation.Nullable;
 
 import com.example.farmerhelper.R;
@@ -15,14 +16,15 @@ import com.example.farmerhelper.results.ErrorResult;
 import com.example.farmerhelper.results.Result;
 import com.example.farmerhelper.results.SuccessResult;
 
-public class PlantDbManager extends DbManagerBase  {
+public class PlantDbManager extends DbManagerBase {
 
     //region Constructor
     private SQLiteDatabase db;
     Context context;
+
     public PlantDbManager(@Nullable Context context) {
         super(context);
-        this.context=context;
+        this.context = context;
         db = getWritableDatabase();
     }
     //endregion
@@ -70,7 +72,7 @@ public class PlantDbManager extends DbManagerBase  {
                     null,
                     null,
                     null,
-                    PlantOptions.COLUMN_TITLE+" ASC");
+                    PlantOptions.COLUMN_TITLE + " ASC");
         }
     }
     //endregion
@@ -137,7 +139,8 @@ public class PlantDbManager extends DbManagerBase  {
 
     //region Delete Operation
     public Result delete(int id) {
-        if (id == 0) return new ErrorResult(new Exception(context.getString(R.string.id_column_is_more_than_zero)));
+        if (id == 0)
+            return new ErrorResult(new Exception(context.getString(R.string.id_column_is_more_than_zero)));
         DeleteAsync deleteAsync = new DeleteAsync();
         return deleteAsync.doInBackground(id);
     }
@@ -157,4 +160,52 @@ public class PlantDbManager extends DbManagerBase  {
     }
     //endregion
 
+
+    //region Seed Data
+    public void seedData() {
+        SeedAsync seedAsync = new SeedAsync();
+        seedAsync.doInBackground();
+    }
+
+    private class SeedAsync extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            seed();
+            return null;
+        }
+
+        private void seed() {
+            Cursor cursor = db.query(PlantOptions.TABLE_NAME,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            if (cursor.getCount() == 0) {
+                generate("Tree", 0);
+                generate("Flower", 1);
+                generate("Vegetable", 2);
+                generate("Fruit", 3);
+            }
+        }
+
+        private void generate(String Title, int plantType) {
+            for (int i = 1; i <= 9; i++) {
+                ContentValues cv = new ContentValues();
+                cv.put(PlantOptions.COLUMN_TITLE, Title + " 0" + i);
+                cv.put(PlantOptions.COLUMN_PLANT_TYPE, plantType);
+                cv.put(PlantOptions.COLUMN_MORBIDITY, "Lorem ipsum dolor sit amet, consectetur adipiscing elit 0" + i);
+                cv.put(PlantOptions.COLUMN_LIFECYCLE, "Nam luctus sapien a sollicitudin varius 0" + i);
+                cv.put(PlantOptions.COLUMN_IMAGE, (byte[]) null);
+                try {
+                    db.insert(PlantOptions.TABLE_NAME, null, cv);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    //endregion
 }
