@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/shareSocialMedia"
+            android:icon="@drawable/ic_share"
+            android:title="@string/share" />
+        <item
+            android:id="@+id/sendMail"
+            android:icon="@drawable/ic_mail"
+            android:title="@string/send_email" />
+
+
+    </group>
+
+    <item android:title="Account">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/profile"
+                    android:icon="@drawable/ic_profile"
+                    android:title="@string/profile" />
+                <item
+                    android:id="@+id/passwordChange"
+                    android:icon="@drawable/ic_security"
+                    android:title="@string/change_password" />
+                <item
+                    android:id="@+id/logout"
+                    android:icon="@drawable/ic_exit"
+                    android:title="@string/logout" />
+            </group>
+        </menu>
+
+    </item>
+
+</menu>

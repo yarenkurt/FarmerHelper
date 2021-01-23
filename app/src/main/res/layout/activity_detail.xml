@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".DetailActivity"
+    tools:openDrawer="start">
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/header"
+        app:menu="@menu/main_menu" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/toolbarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/cream_700"
+                android:minHeight="?attr/actionBarSize"
+                android:navigationIcon="@drawable/ic_menu"
+                android:theme="?attr/actionBarTheme"
+                tools:ignore="MissingConstraints" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbarLayout"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:id="@+id/plantImage"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center"
+
+                />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|bottom|right"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="100dp"
+                android:background="@color/transparent"
+                android:onClick="selectImage"
+                android:src="@drawable/ic_photo"
+                android:tint="@color/black" />
+
+
+        </FrameLayout>
+
+        <EditText
+            android:id="@+id/titleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/frameLayout"
+            android:layout_centerHorizontal="true"
+            android:hint="@string/plant_name" />
+
+        <EditText
+            android:id="@+id/morbidityText"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/titleText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:hint="@string/morbidity" />
+
+        <EditText
+            android:id="@+id/lifecycleText"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/morbidityText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:hint="@string/lifecycle" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lifecycleText"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/cancelButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="start"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/custom_button"
+                android:onClick="cancel"
+                android:text="@string/cancel"
+                android:textSize="17sp" />
+
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/custom_button"
+                android:onClick="save"
+                android:text="@string/save"
+                android:textSize="17sp" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</androidx.drawerlayout.widget.DrawerLayout>
