@@ -2,7 +2,6 @@ package com.example.farmerhelper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +31,7 @@ import android.widget.Toast;
 
 import com.example.farmerhelper.db.PlantDbManager;
 import com.example.farmerhelper.db.options.PlantOptions;
+import com.example.farmerhelper.helpers.HtmlHelper;
 import com.example.farmerhelper.models.PlantModel;
 import com.example.farmerhelper.models.Settings;
 import com.example.farmerhelper.results.Result;
@@ -39,7 +39,6 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Base64;
 
 public class DetailActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
@@ -79,7 +78,7 @@ public class DetailActivity extends AppCompatActivity implements NavigationView.
         morbidity = findViewById(R.id.morbidityText);
         lifecycle = findViewById(R.id.lifecycleText);
         plantImage = findViewById(R.id.plantImage);
-        plantType = intent.getIntExtra("plantType",0);
+        plantType = intent.getIntExtra("plantType", 0);
         Id = intent.getIntExtra("id", 0);
         selectedImage = BitmapFactory.decodeResource(getApplicationContext().getResources(), setDefaultImage());
         plantImage.setImageBitmap(selectedImage);
@@ -107,12 +106,12 @@ public class DetailActivity extends AppCompatActivity implements NavigationView.
                 sendEmail();
                 break;
             case R.id.profile:
-                startActivity(new Intent(this,ProfileActivity.class));
+                startActivity(new Intent(this, ProfileActivity.class));
                 //Intent intent = new Intent(DetailActivity.this, ProfileActivity.class);
                 //startActivity(intent);
                 break;
             case R.id.passwordChange:
-                startActivity(new Intent(this,PasswordChangeActivity.class));
+                startActivity(new Intent(this, PasswordChangeActivity.class));
                 //Intent pwdIntent = new Intent(DetailActivity.this, PasswordChangeActivity.class);
                 //startActivity(pwdIntent);
                 break;
@@ -126,22 +125,36 @@ public class DetailActivity extends AppCompatActivity implements NavigationView.
     }
 
     private void share() {
+        String message =
+                getString(R.string.title)+": "+title.getText().toString()+"\n"+
+                getString(R.string.morbidity)+": "+morbidity.getText().toString()+"\n"+
+                getString(R.string.lifecycle)+": "+lifecycle.getText().toString()+"\n";
+        Intent sendIntent = new Intent(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT,message);
+        sendIntent.setType("text/plain");
 
+        Intent chooser=Intent.createChooser(sendIntent,getString(R.string.share));
+        if (sendIntent.resolveActivity(getPackageManager())!=null){
+            startActivity(chooser);
+        }
     }
 
-    public void sendEmail()
-    {
-
+    public void sendEmail() {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
         intent.setType("text/html");
         String html =
-                "Title       : " + title.getText().toString() + "\n" +
-                        "<b>Morbidity</b>    : " + morbidity.getText().toString() + "\n" +
-                        "Lifecycle    : " + lifecycle.getText().toString();
+                HtmlHelper.mailHtml
+                        .replace("[TitleTitle]", getString(R.string.title))
+                        .replace("[TitleValue]", title.getText().toString())
+                        .replace("[MorbidityTitle]", getString(R.string.morbidity))
+                        .replace("[MorbidityValue]", morbidity.getText().toString())
+                        .replace("[LifecycleTitle]", getString(R.string.lifecycle))
+                        .replace("[LifecycleValue]", lifecycle.getText().toString());
         intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(html));
-        startActivity(Intent.createChooser(intent, getString(R.string.share)));
+        startActivity(Intent.createChooser(intent, getString(R.string.send_email)));
     }
+
     private void logout() {
         AlertDialog.Builder alert = new AlertDialog.Builder(DetailActivity.this);
         alert.setTitle(R.string.logout_now_are_you_sure);

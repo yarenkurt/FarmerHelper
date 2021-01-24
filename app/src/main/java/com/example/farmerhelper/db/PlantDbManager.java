@@ -16,6 +16,8 @@ import com.example.farmerhelper.results.ErrorResult;
 import com.example.farmerhelper.results.Result;
 import com.example.farmerhelper.results.SuccessResult;
 
+import java.util.Locale;
+
 public class PlantDbManager extends DbManagerBase {
 
     //region Constructor
@@ -30,6 +32,9 @@ public class PlantDbManager extends DbManagerBase {
     //endregion
 
     //region Db Read Operations
+    private static String langCode() {
+        return Locale.getDefault().getLanguage();
+    }
 
     public Cursor getAll(int plantType) {
         GetAllAsync getAllAsync = new GetAllAsync();
@@ -38,6 +43,7 @@ public class PlantDbManager extends DbManagerBase {
 
     public Cursor get(int id) {
         GetAsync getAsync = new GetAsync();
+        //Locale.getDefault().getDisplayLanguage()
         return getAsync.doInBackground(id);
     }
 
@@ -68,7 +74,9 @@ public class PlantDbManager extends DbManagerBase {
         private Cursor getAll(int plantType) {
             return db.query(PlantOptions.TABLE_NAME,
                     null,
-                    PlantOptions.COLUMN_PLANT_TYPE + " = '" + plantType + "'",
+                    PlantOptions.COLUMN_PLANT_TYPE + " = '" + plantType + "'"
+                            + " and " + PlantOptions.COLUMN_LANG_CODE + " ='" + langCode() + "'"
+                    ,
                     null,
                     null,
                     null,
@@ -104,6 +112,7 @@ public class PlantDbManager extends DbManagerBase {
         private Result insert(PlantModel plantModel) {
             ContentValues cv = new ContentValues();
             cv.put(PlantOptions.COLUMN_TITLE, plantModel.Title);
+            cv.put(PlantOptions.COLUMN_LANG_CODE, langCode());
             cv.put(PlantOptions.COLUMN_PLANT_TYPE, plantModel.PlantType);
             cv.put(PlantOptions.COLUMN_MORBIDITY, plantModel.Morbidity);
             cv.put(PlantOptions.COLUMN_LIFECYCLE, plantModel.Lifecycle);
@@ -160,7 +169,6 @@ public class PlantDbManager extends DbManagerBase {
     }
     //endregion
 
-
     //region Seed Data
     public void seedData() {
         SeedAsync seedAsync = new SeedAsync();
@@ -184,17 +192,23 @@ public class PlantDbManager extends DbManagerBase {
                     null,
                     null);
             if (cursor.getCount() == 0) {
-                generate("Tree", 0);
-                generate("Flower", 1);
-                generate("Vegetable", 2);
-                generate("Fruit", 3);
+                generate("Ağaç", 0,"tr");
+                generate("Çiçek", 1,"tr");
+                generate("Sebze", 2,"tr");
+                generate("Meyve", 3,"tr");
+
+                generate("Tree", 0,"en");
+                generate("Flower", 1,"en");
+                generate("Vegetable", 2,"en");
+                generate("Fruit", 3,"en");
             }
         }
 
-        private void generate(String Title, int plantType) {
+        private void generate(String Title, int plantType, String langCode) {
             for (int i = 1; i <= 9; i++) {
                 ContentValues cv = new ContentValues();
                 cv.put(PlantOptions.COLUMN_TITLE, Title + " 0" + i);
+                cv.put(PlantOptions.COLUMN_LANG_CODE, langCode);
                 cv.put(PlantOptions.COLUMN_PLANT_TYPE, plantType);
                 cv.put(PlantOptions.COLUMN_MORBIDITY, "Lorem ipsum dolor sit amet, consectetur adipiscing elit 0" + i);
                 cv.put(PlantOptions.COLUMN_LIFECYCLE, "Nam luctus sapien a sollicitudin varius 0" + i);

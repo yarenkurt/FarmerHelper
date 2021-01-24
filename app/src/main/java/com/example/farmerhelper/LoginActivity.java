@@ -18,6 +18,8 @@ import com.example.farmerhelper.models.Settings;
 import com.example.farmerhelper.results.DataResult;
 import com.example.farmerhelper.results.Result;
 
+import java.util.Locale;
+
 public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     ProgressBar loading;
@@ -28,7 +30,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         btnLogin = findViewById(R.id.btnLogin);
         loading = findViewById(R.id.loading);
         email = findViewById(R.id.email);

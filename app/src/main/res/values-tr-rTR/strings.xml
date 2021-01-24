@@ -3,6 +3,7 @@
     <string name="app_name">Çiftçi Yardımcısı</string>
     <string name="navigation_drawer_open">Menüyü Aç</string>
     <string name="navigation_drawer_close">Menüyü Kapat</string>
+    <string name="title">Başlık</string>
     <string name="tab_tree">Ağaç</string>
     <string name="tab_flower">Çiçek</string>
     <string name="tab_vegetable">Sebze</string>
@@ -46,4 +47,10 @@
     <string name="passwords_are_not_same">Şifreler uyumsuz!</string>
     <string name="full_name_should_be_more_than_4_characters">Ad / Soyat alanı 4 karakterden fazla olmalı</string>
     <string name="please_enter_valid_email">Lütfen geçerli bir E-Posta girin!</string>
+    <string name="item_is_deleting_are_you_sure">Kayıt silinecek. Emin misiniz? </string>
+    <string-array name="genders">
+        <item></item>
+        <item>Erkek</item>
+        <item>Kadin</item>
+    </string-array>
 </resources>

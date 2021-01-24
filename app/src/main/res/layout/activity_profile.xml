@@ -88,14 +88,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gender" />
+
+                <Spinner
+                    android:padding="0dp"
                     android:id="@+id/txtGender"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/transparent"
-                    android:hint="@string/gender"
-                    android:inputType="textPersonName"
-                    android:textColor="@color/orange" />
+                    android:layout_height="35dp"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <ProgressBar

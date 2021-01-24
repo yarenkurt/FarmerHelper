@@ -2,7 +2,7 @@
     <string name="app_name">Farmer Helper</string>
     <string name="navigation_drawer_open">Open Navigation</string>
     <string name="navigation_drawer_close">Close Navigation</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title">title</string>
     <string name="tab_tree">Tree</string>
     <string name="tab_flower">Flower</string>
     <string name="tab_vegetable">Vegetable</string>
@@ -46,4 +46,11 @@
     <string name="passwords_are_not_same">Passwords are not same!</string>
     <string name="full_name_should_be_more_than_4_characters">FullName should be more than 4 characters</string>
     <string name="please_enter_valid_email">Please, enter valid email!</string>
+    <string name="item_is_deleting_are_you_sure">Item is deleting. Are you sure? </string>
+
+    <string-array name="genders">
+        <item></item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
 </resources>

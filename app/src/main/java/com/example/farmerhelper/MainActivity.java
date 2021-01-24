@@ -14,6 +14,8 @@ import android.view.View;
 
 import com.example.farmerhelper.ui.main.SectionsPagerAdapter;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
     int plantType;
     @Override
